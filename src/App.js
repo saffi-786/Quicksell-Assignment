@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState, useEffect } from "react";
+import KanbanBoard from "./components/KanbanBoard";
+import Filter from "./components/Filter";
+import "./App.css";
+// import { getData } from "./data/getData";
+import axios from "axios";
 
 function App() {
+  const [groupBy, setGroupBy] = useState("status");
+  const [sortBy, setSortBy] = useState("priority");
+
+  const [tickets, setTickets] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}`)
+      .then((response) => {
+        setTickets(response.data.tickets);
+        setUsers(response.data.users);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Load saved settings from localStorage
+    const savedGroupBy = localStorage.getItem("groupBy");
+    const savedSortBy = localStorage.getItem("sortBy");
+    if (savedGroupBy) setGroupBy(savedGroupBy);
+    if (savedSortBy) setSortBy(savedSortBy);
+  }, []);
+
+  useEffect(() => {
+    // Save the settings in localStorage
+    localStorage.setItem("groupBy", groupBy);
+    localStorage.setItem("sortBy", sortBy);
+  }, [groupBy, sortBy]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Filter
+        groupBy={groupBy}
+        setGroupBy={setGroupBy}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
+      <KanbanBoard
+        tickets={tickets}
+        users={users}
+        groupBy={groupBy}
+        sortBy={sortBy}
+      />
     </div>
   );
 }
