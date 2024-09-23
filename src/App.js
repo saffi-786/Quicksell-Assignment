@@ -1,9 +1,7 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import KanbanBoard from "./components/KanbanBoard";
 import Filter from "./components/Filter";
 import "./App.css";
-// import { getData } from "./data/getData";
 import axios from "axios";
 
 function App() {
@@ -26,7 +24,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Load saved settings from localStorage
     const savedGroupBy = localStorage.getItem("groupBy");
     const savedSortBy = localStorage.getItem("sortBy");
     if (savedGroupBy) setGroupBy(savedGroupBy);
@@ -34,7 +31,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Save the settings in localStorage
     localStorage.setItem("groupBy", groupBy);
     localStorage.setItem("sortBy", sortBy);
   }, [groupBy, sortBy]);

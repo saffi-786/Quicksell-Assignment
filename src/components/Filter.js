@@ -4,7 +4,6 @@ import React, { useState } from "react";
 const Filter = ({ groupBy, setGroupBy, sortBy, setSortBy }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Function to toggle the dropdown
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

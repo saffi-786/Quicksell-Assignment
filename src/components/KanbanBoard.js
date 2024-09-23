@@ -1,4 +1,3 @@
-// KanbanBoard.js
 import React, { useEffect, useState } from "react";
 import TicketCard from "./TicketCard";
 import "./style.css";
@@ -46,7 +45,7 @@ const KanbanBoard = ({ tickets, users, groupBy, sortBy }) => {
   const priorityLabels = ["No Priority", "Low", "Medium", "High", "Urgent"];
   useEffect(() => {
     let grouped = {};
-    // Group tickets based on the selected option
+
     if (groupBy === "status") {
       grouped = tickets.reduce((acc, ticket) => {
         acc[ticket.status] = acc[ticket.status] || [];
@@ -72,7 +71,6 @@ const KanbanBoard = ({ tickets, users, groupBy, sortBy }) => {
     setGroupedTickets(grouped);
   }, [tickets, groupBy, users]);
 
-  // Sort tickets based on the sortBy parameter
   const sortTickets = (ticketsArray) => {
     if (sortBy === "priority") {
       return ticketsArray.sort((a, b) => b.priority - a.priority);
