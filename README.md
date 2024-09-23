@@ -1,3 +1,15 @@
+# Group By Status
+
+![alt text](status.png)
+
+# Group By Priority
+
+![alt text](priority.png)
+
+# Group By User
+
+![alt text](user_groupby.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
